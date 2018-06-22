@@ -3,7 +3,6 @@ package com.telusko.quiz.entity;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -34,8 +33,6 @@ public class TopicModel {
 	public String name;
 	
 	@ElementCollection
-  //  @CollectionTable(name = "questions")
-//    @Column(name = "question")
 	@OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "Topic_Questions",
