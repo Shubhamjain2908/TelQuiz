@@ -70,11 +70,30 @@ public class ResponseHandler implements ResponseBodyAdvice<Object>
 
 		if (httpRequest.getMethod().equals(HttpMethod.GET) && body instanceof SubjectModel ) 
 		{
+			apiResponse.setMessage("Questions found");
+			apiResponse.setSubject((SubjectModel) body);
+		}
+		
+		if (httpRequest.getMethod().equals(HttpMethod.POST) && body instanceof SubjectModel ) 
+		{
 			apiResponse.setMessage("Question successfully added");
 			apiResponse.setSubject((SubjectModel) body);
 		}
-
-		return apiResponse;
+		
+		if (httpRequest.getMethod().equals(HttpMethod.PUT) && body instanceof SubjectModel ) 
+		{
+			apiResponse.setMessage("Question successfully updated");
+			apiResponse.setSubject((SubjectModel) body);
+		}
+		
+		if (body instanceof String ) 
+		{
+			apiResponse.setMessage("Successfully executed");
+			return body;
+		}
+		
+//		return apiResponse;
+		return body;
 	}
 
 }

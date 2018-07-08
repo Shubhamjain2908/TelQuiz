@@ -1,15 +1,10 @@
 package com.telusko.quiz.service;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.telusko.quiz.entity.QuestionModel;
 import com.telusko.quiz.entity.SubjectModel;
 import com.telusko.quiz.exception.BadRequestException;
-import com.telusko.quiz.repository.QuestionRepository;
 import com.telusko.quiz.repository.SubjectRepository;
 
 /**
@@ -19,26 +14,28 @@ import com.telusko.quiz.repository.SubjectRepository;
  * @since 22-06-2018
  */
 @Service
-public class QuestionService {
+public class SubjectService {
 
 	@Autowired
 	private SubjectRepository sR;
 	
-//	@Autowired
-//	private QuestionRepository qR;
-	
-	public List<SubjectModel> getAllQuestions() 
+	public SubjectModel addSubjects(String subjectName) 
 	{
-		return sR.findAll();
+		SubjectModel sM = new SubjectModel();
+		sM.setName(subjectName);
+		if(sR.findByName(subjectName) != null) 
+		{
+			throw new BadRequestException("Subject already exists");
+		}
+		return sR.save(sM);
 	}
 	
-	public SubjectModel getQuestion(String subjectID) 
+	public void removeSubject(String subjectName) 
 	{
-		return sR.findByName(subjectID);
+		if(sR.findByName(subjectName) == null) 
+		{
+			throw new BadRequestException("Subject does not exists");
+		}
+		sR.deleteById(subjectName);
 	}
-	
-//	public QuestionModel getOneQuestion(int id) 
-//	{
-//		return qR.findByQId(id);
-//	}
 }

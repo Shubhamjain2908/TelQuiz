@@ -1,8 +1,13 @@
 package com.telusko.quiz.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telusko.quiz.entity.QuestionModel;
@@ -24,9 +29,20 @@ public class QuestionController {
 	private QuestionService qS;
 	
 	@GetMapping
-	public SubjectModel getQuestions() 
+	public List<SubjectModel> getSubjects() 
 	{
-		return qS.getQuestion();
+		return qS.getAllQuestions();
 	}
 	
+	@GetMapping(value="/{subjectID}")
+	public SubjectModel getSubject(@PathVariable("subjectID") String subjectID) 
+	{
+		return qS.getQuestion(subjectID);
+	}
+	
+	@GetMapping
+	public QuestionModel getOneQuestion() 
+	{
+		return null;
+	}
 }
