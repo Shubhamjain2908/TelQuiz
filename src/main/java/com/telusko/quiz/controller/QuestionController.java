@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.telusko.quiz.entity.QuestionModel;
 import com.telusko.quiz.entity.SubjectModel;
 import com.telusko.quiz.service.QuestionService;
-
+import org.springframework.http.HttpStatus;
 /**
  * This is a controller for handling/delegating requests to service layer.
  * 
@@ -29,20 +29,15 @@ public class QuestionController {
 	private QuestionService qS;
 	
 	@GetMapping
-	public List<SubjectModel> getSubjects() 
+	public ResponseEntity<List<SubjectModel>> getSubjects() 
 	{
-		return qS.getAllQuestions();
+		return new ResponseEntity<List<SubjectModel>>(qS.getAllQuestions(), HttpStatus.FOUND);
 	}
 	
 	@GetMapping(value="/{subjectID}")
-	public SubjectModel getSubject(@PathVariable("subjectID") String subjectID) 
+	public ResponseEntity<SubjectModel> getSubject(@PathVariable("subjectID") String subjectID, @RequestParam Map<String,String> allRequestParam) 
 	{
-		return qS.getQuestion(subjectID);
+		return new ResponseEntity<SubjectModel>(qS.getQuestions(subjectID, allRequestParam), HttpStatus.FOUND);
 	}
-	
-	@GetMapping
-	public QuestionModel getOneQuestion() 
-	{
-		return null;
-	}
+
 }

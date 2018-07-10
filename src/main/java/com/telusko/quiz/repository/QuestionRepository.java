@@ -11,5 +11,5 @@ import com.telusko.quiz.entity.QuestionModel;
  * @since 22-06-2018
  */
 public interface QuestionRepository extends JpaRepository<QuestionModel, Integer>{
-	//public QuestionModel findByQId(Integer id);
+	
 }

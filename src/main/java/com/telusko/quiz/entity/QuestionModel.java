@@ -34,7 +34,7 @@ public class QuestionModel {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Question_Id")
-	public Integer QId;
+	public Integer QuestionId;
 	
 	@Column(name = "Questions")
 	public String question;
