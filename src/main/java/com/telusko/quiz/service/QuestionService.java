@@ -15,6 +15,7 @@ import com.telusko.quiz.entity.SubjectModel;
 import com.telusko.quiz.entity.TopicModel;
 import com.telusko.quiz.exception.BadRequestException;
 import com.telusko.quiz.repository.TopicRepository;
+import com.telusko.quiz.repository.QuestionRepository;
 import com.telusko.quiz.repository.SubjectRepository;
 
 /**
@@ -31,6 +32,9 @@ public class QuestionService {
 	
 	@Autowired
 	private TopicRepository tR;
+	
+	@Autowired
+	private QuestionRepository qR;
 	
 	public List<SubjectModel> getAllQuestions() 
 	{
@@ -54,9 +58,9 @@ public class QuestionService {
 		return sR.findByName(subjectID);
 	}
 	
-	public QuestionModel getOneQuestion(int id) 
+	public QuestionModel getOneQuestion(Integer id) 
 	{
-		return null;
+		return qR.findById(id).get();
 	}
 
 	public SubjectModel addQuestions(String subjectID, String topic, QuestionModel question) 
@@ -68,7 +72,9 @@ public class QuestionService {
 		}
 		if(!StringUtils.isEmpty(topic) && tR.findById(topic).isPresent()) 
 		{
-			s.getTopics().stream().filter(t -> t.getName().equals(topic)).findFirst().get().setQuestions(new HashSet<>(Arrays.asList(question)));
+//			TopicModel tt = s.getTopics().stream().filter(t -> t.getName().equals(topic)).findFirst().get();
+//			tt.getQuestions().add(question);
+			s.getTopics().stream().filter(t -> t.getName().equals(topic)).findFirst().get().getQuestions().add(question);
 			return sR.save(s);
 		}
 		throw new BadRequestException("Mention a topic for question");

@@ -32,15 +32,21 @@ public class QuestionController {
 	private QuestionService qS;
 	
 	@GetMapping
-	public ResponseEntity<List<SubjectModel>> getSubjects() 
+	public ResponseEntity<List<SubjectModel>> getAll() 
 	{
 		return new ResponseEntity<List<SubjectModel>>(qS.getAllQuestions(), HttpStatus.FOUND);
 	}
 	
 	@GetMapping(value="/{subjectID}")
-	public ResponseEntity<SubjectModel> getSubject(@PathVariable("subjectID") String subjectID, @RequestParam Map<String,String> allRequestParam) 
+	public ResponseEntity<SubjectModel> getOneSubject(@PathVariable("subjectID") String subjectID, @RequestParam Map<String,String> allRequestParam) 
 	{
 		return new ResponseEntity<SubjectModel>(qS.getQuestions(subjectID, allRequestParam), HttpStatus.FOUND);
+	}
+	
+	@GetMapping(value="/one")
+	public ResponseEntity<QuestionModel> getOneQuestion(@RequestParam("questionId") Integer id)
+	{
+		return new ResponseEntity<QuestionModel>(qS.getOneQuestion(id), HttpStatus.FOUND);
 	}
 	
 	@PostMapping(value="/{subjectID}")
