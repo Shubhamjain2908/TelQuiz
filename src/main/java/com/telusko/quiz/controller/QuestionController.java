@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.telusko.quiz.entity.QuestionModel;
 import com.telusko.quiz.entity.SubjectModel;
 import com.telusko.quiz.service.QuestionService;
 import org.springframework.http.HttpStatus;
@@ -39,5 +42,10 @@ public class QuestionController {
 	{
 		return new ResponseEntity<SubjectModel>(qS.getQuestions(subjectID, allRequestParam), HttpStatus.FOUND);
 	}
-
+	
+	@PostMapping(value="/{subjectID}")
+	public ResponseEntity<SubjectModel> addSubject(@PathVariable("subjectID") String subjectID, @RequestParam("topic") String topic,@RequestBody QuestionModel question) 
+	{
+		return new ResponseEntity<SubjectModel>(qS.addQuestions(subjectID, topic, question), HttpStatus.CREATED);
+	}
 }

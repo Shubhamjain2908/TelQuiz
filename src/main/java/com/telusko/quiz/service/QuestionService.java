@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.telusko.quiz.entity.QuestionModel;
 import com.telusko.quiz.entity.SubjectModel;
@@ -56,5 +57,20 @@ public class QuestionService {
 	public QuestionModel getOneQuestion(int id) 
 	{
 		return null;
+	}
+
+	public SubjectModel addQuestions(String subjectID, String topic, QuestionModel question) 
+	{	
+		SubjectModel s = sR.findByName(subjectID);
+		if(null == s) 
+		{
+			throw new BadRequestException("Subject with name " + subjectID + " is not present");
+		}
+		if(!StringUtils.isEmpty(topic) && tR.findById(topic).isPresent()) 
+		{
+			s.getTopics().stream().filter(t -> t.getName().equals(topic)).findFirst().get().setQuestions(new HashSet<>(Arrays.asList(question)));
+			return sR.save(s);
+		}
+		throw new BadRequestException("Mention a topic for question");
 	}
 }
