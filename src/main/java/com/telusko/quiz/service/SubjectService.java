@@ -19,6 +19,11 @@ public class SubjectService {
 	@Autowired
 	private SubjectRepository sR;
 	
+	/**
+	 * Method to add a subject
+	 * @param subjectName
+	 * @return
+	 */
 	public SubjectModel addSubjects(String subjectName) 
 	{
 		SubjectModel sM = new SubjectModel();
@@ -30,6 +35,10 @@ public class SubjectService {
 		return sR.save(sM);
 	}
 	
+	/**
+	 * Method to remove a subject
+	 * @param subjectName
+	 */
 	public void removeSubject(String subjectName) 
 	{
 		if(sR.findByName(subjectName) == null) 

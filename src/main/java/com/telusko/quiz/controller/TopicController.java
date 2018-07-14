@@ -28,18 +28,33 @@ public class TopicController {
 	@Autowired
 	private TopicService tS;
 	
+	/**
+	 * Get list of all the topics
+	 * @return
+	 */
 	@GetMapping
 	public List<TopicModel> getTopics() 
 	{
 		return tS.getTopics();
 	}
 	
+	/**
+	 * Add a topic in a subject
+	 * @param subjectName
+	 * @param topicName
+	 * @return
+	 */
 	@PostMapping
 	public TopicModel addTopic(@PathVariable("subjectName") String subjectName, @PathVariable("topicName") String topicName) 
 	{
 		return tS.addTopic(subjectName, topicName);
 	}
 	
+	/**
+	 * Delete a topic
+	 * @param topicName
+	 * @return
+	 */
 	@DeleteMapping
 	public String deleteTopic(@RequestParam(value="topic") String topicName) 
 	{

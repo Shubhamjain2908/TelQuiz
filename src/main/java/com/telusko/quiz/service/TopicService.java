@@ -25,11 +25,21 @@ public class TopicService {
 	@Autowired
 	private SubjectRepository sR; 
 	
+	/**
+	 * Get list of all topics
+	 * @return
+	 */
 	public List<TopicModel> getTopics() 
 	{
 		return tR.findAll();
 	}
 	
+	/**
+	 * Method to add a topic in a particular subject
+	 * @param subjectName
+	 * @param topicName
+	 * @return
+	 */
 	public TopicModel addTopic(String subjectName, String topicName) 
 	{
 		if(null == sR.findByName(subjectName)) 
@@ -40,12 +50,13 @@ public class TopicService {
 		{
 			throw new BadRequestException("Topic already exists..");
 		}
-//		TopicModel t = new TopicModel();
-//		t.setName(topicName);
-//		return tR.save(t);
 		return null;
 	}
 	
+	/**
+	 * Method to remove a topic
+	 * @param topicName
+	 */
 	public void removeTopic(String topicName) 
 	{
 		if(tR.findByName(topicName) == null) 

@@ -24,12 +24,22 @@ public class SubjectController {
 	@Autowired
 	private SubjectService sS;
 	
+	/**
+	 * Method to add a subject
+	 * @param subjectName
+	 * @return
+	 */
 	@PostMapping
 	public SubjectModel addSub(@PathVariable("subjectName") String subjectName) 
 	{
 		return sS.addSubjects(subjectName);
 	}
 	
+	/**
+	 * Delete a subject 
+	 * @param subjectName
+	 * @return
+	 */
 	@DeleteMapping
 	public String deleteSubject(@PathVariable("subjectName") String subjectName) 
 	{

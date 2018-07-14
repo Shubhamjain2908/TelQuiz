@@ -36,11 +36,21 @@ public class QuestionService {
 	@Autowired
 	private QuestionRepository qR;
 	
+	/**
+	 * Get list of all questions of all subjects
+	 * @return
+	 */
 	public List<SubjectModel> getAllQuestions() 
 	{
 		return sR.findAll();
 	}
-
+	
+	/**
+	 * Get questions of a particular Topic in a Subject
+	 * @param subjectID
+	 * @param allRequestParams
+	 * @return
+	 */
 	public SubjectModel getQuestions(String subjectID, Map<String, String> allRequestParams) 
 	{
 		if(allRequestParams.containsKey("topic") && !allRequestParams.get("topic").isEmpty()) 
@@ -58,11 +68,23 @@ public class QuestionService {
 		return sR.findByName(subjectID);
 	}
 	
+	/**
+	 * Get one questions by its ID
+	 * @param id
+	 * @return
+	 */
 	public QuestionModel getOneQuestion(Integer id) 
 	{
 		return qR.findById(id).get();
 	}
-
+	
+	/**
+	 * Add a question in a Subject
+	 * @param subjectID
+	 * @param topic
+	 * @param question
+	 * @return
+	 */
 	public SubjectModel addQuestions(String subjectID, String topic, QuestionModel question) 
 	{	
 		SubjectModel s = sR.findByName(subjectID);
