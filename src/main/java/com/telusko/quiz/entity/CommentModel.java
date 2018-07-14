@@ -26,7 +26,7 @@ public class CommentModel {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "Comment_Id")
-	public Integer CId;
+	public Integer CommentId;
 	
 	@Column(name = "message")
 	public String message;

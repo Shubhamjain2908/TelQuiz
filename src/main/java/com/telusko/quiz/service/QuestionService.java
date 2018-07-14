@@ -45,7 +45,7 @@ public class QuestionService {
 	{
 		if(allRequestParams.containsKey("topic") && !allRequestParams.get("topic").isEmpty()) 
 		{
-			if(tR.findById(allRequestParams.get("topic")).isPresent()) 
+			if(null != tR.findByName(allRequestParams.get("topic"))) 
 			{
 				SubjectModel s = new SubjectModel();
 				s.setName(subjectID);
@@ -70,7 +70,7 @@ public class QuestionService {
 		{
 			throw new BadRequestException("Subject with name " + subjectID + " is not present");
 		}
-		if(!StringUtils.isEmpty(topic) && tR.findById(topic).isPresent()) 
+		if(!StringUtils.isEmpty(topic) && null != tR.findByName(topic)) 
 		{
 //			TopicModel tt = s.getTopics().stream().filter(t -> t.getName().equals(topic)).findFirst().get();
 //			tt.getQuestions().add(question);

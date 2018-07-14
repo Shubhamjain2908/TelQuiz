@@ -10,6 +10,6 @@ import com.telusko.quiz.entity.TopicModel;
  * @author SHUBHAM JAIN
  * @since 22-06-2018
  */
-public interface TopicRepository extends JpaRepository<TopicModel, String> {
-	
+public interface TopicRepository extends JpaRepository<TopicModel, Integer> {
+	public TopicModel findByName(String name);
 }

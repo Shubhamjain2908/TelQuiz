@@ -38,7 +38,7 @@ public class SubjectModel {
     @JoinTable(
             name = "Subject_Topic",
             joinColumns = @JoinColumn(name = "Subject_Name"),
-    		inverseJoinColumns = @JoinColumn(name = "Topic_Name")
+    		inverseJoinColumns = @JoinColumn(name = "Topic_Id")
     )
 	public Set<TopicModel> topics;
 	

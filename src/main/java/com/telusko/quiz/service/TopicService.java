@@ -23,7 +23,7 @@ public class TopicService {
 	private TopicRepository tR;
 	
 	@Autowired
-	private SubjectRepository sR;
+	private SubjectRepository sR; 
 	
 	public List<TopicModel> getTopics() 
 	{
@@ -32,25 +32,26 @@ public class TopicService {
 	
 	public TopicModel addTopic(String subjectName, String topicName) 
 	{
-		if(sR.findByName(subjectName) == null) 
+		if(null == sR.findByName(subjectName)) 
 		{
 			throw new BadRequestException("No subject exists..");
 		} 
-		if(tR.findById(topicName) != null) 
+		if(tR.findByName(topicName) != null) 
 		{
 			throw new BadRequestException("Topic already exists..");
 		}
-		TopicModel t = new TopicModel();
-		t.setName(topicName);
-		return tR.save(t);
+//		TopicModel t = new TopicModel();
+//		t.setName(topicName);
+//		return tR.save(t);
+		return null;
 	}
 	
 	public void removeTopic(String topicName) 
 	{
-		if(tR.findById(topicName) == null) 
+		if(tR.findByName(topicName) == null) 
 		{
 			throw new BadRequestException("Topic does not exists..");
 		}
-		tR.deleteById(topicName);
+		tR.deleteById(0);	// Integer
 	}
 }

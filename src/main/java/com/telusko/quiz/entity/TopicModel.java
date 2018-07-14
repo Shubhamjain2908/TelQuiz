@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,6 +32,10 @@ import lombok.Data;
 public class TopicModel {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="Topic_Id")
+	public Integer TopicId;
+	
 	@Column(name="Topic_Name")
 	public String name;
 	
@@ -37,7 +43,7 @@ public class TopicModel {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "Topic_Questions",
-            joinColumns = @JoinColumn(name = "Topic_Name"),
+            joinColumns = @JoinColumn(name = "Topic_Id"),
             inverseJoinColumns = @JoinColumn(name = "Question_Id") 
     )
 	public Set<QuestionModel> questions;

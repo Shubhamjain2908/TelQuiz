@@ -12,7 +12,6 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.telusko.quiz.controller.QuestionController;
 import com.telusko.quiz.entity.SubjectModel;
 import com.telusko.quiz.exception.ApiErrorResponse;
 
@@ -24,7 +23,7 @@ import com.telusko.quiz.exception.ApiErrorResponse;
  * @since 22-06-2018
  *
  */
-@ControllerAdvice(basePackageClasses=QuestionController.class)
+@ControllerAdvice
 public class ResponseHandler implements ResponseBodyAdvice<Object> 
 {
 	/**
